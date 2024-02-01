@@ -1,0 +1,6 @@
+data
+.venv
+python/__pycache__/
+
+*.swo
+*.swp
