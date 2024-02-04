@@ -1,1 +1,2 @@
 In proportionLong, don't understand F24.
+In theModel, don't understand why columns Q uses col B in exponentiation rather than col A.

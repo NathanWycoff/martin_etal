@@ -4,3 +4,5 @@ python/__pycache__/
 
 *.swo
 *.swp
+
+*.pdf

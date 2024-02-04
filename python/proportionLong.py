@@ -13,9 +13,9 @@ not_hosp = positive_tests - hospitalized_uk #D13
 prop_hosp = hospitalized_uk / positive_tests #E13
 
 #5 "To estimate the proportion of undetected cases" (out of order because is necessary to compute 2.1).
-uk_pop = 6.66e7 # UK Population	
+population = 6.66e7 # UK Population	
 prop_infected = 0.12 # Proportion of UK population have been infected
-covid_infections = uk_pop * prop_infected
+covid_infections = population * prop_infected
 all_case_correction = positive_tests / covid_infections
 puduh = 1. #Proportion of undetected cases are non-hospitalised	
 
@@ -49,7 +49,7 @@ prop_nonhosp_survivors_corrected = (covid_infections - hospitalized_uk) / (covid
 
 # Compute proportions from 2.4-3
 denom = prop_itu_survivors_corrected + prop_ward_survivors_corrected + prop_nonhosp_survivors_corrected
-pITU_SurvAlln = prop_itu_survivors_corrected / denom # /G29 "Proportion of all survivors suriviving ITU care"
+pITU_survAlln = prop_itu_survivors_corrected / denom # /G29 "Proportion of all survivors suriviving ITU care"
 pWard_SurvAlln = prop_ward_survivors_corrected / denom # /G35 "Proportion of all survivors surviving ward"
 pNonHosp_SurvAlln = prop_nonhosp_survivors_corrected / denom # /G39 "Proportion of all survivors that are non-hospitalised and survive"
 
@@ -65,18 +65,17 @@ symp_oak_itu =  p48_ITU * prop_itu_survivors # p48_ITU_allCases
 symp_oak_ward =  p48_Ward * prop_ward_survivors # p48Ward_allCases 
 symp_oak_nonhosp =  p48_NonHosp * prop_nonhosp_survivors # p48NonHosp_allCases 
 
-
 # 4.4 "Assumption for proportion of symptomatic-COVID permanently injured"
 # ppi - proportion of permanent injury
-ppi_itu = 0.5 # "Proportion of symptomatic-COVID at 6 weeks that are permanently injured in ICU survivors."
-ppi_ward = ppi_itu / 10 # "Proportion of symptomatic-COVID at 6 weeks that are permanently injured in ward survivors."
-ppi_nonhosp = ppi_ward / 10 # "Proportion of symptomatic-COVID at 6 weeks that are permanently injured in non-hospitalised survivors."
+injuryRate_ITU = 0.5 # "Proportion of symptomatic-COVID at 6 weeks that are permanently injured in ICU survivors."
+injuryRate_Ward = injuryRate_ITU / 10 # "Proportion of symptomatic-COVID at 6 weeks that are permanently injured in ward survivors."
+injuryRate_NonHosp = injuryRate_Ward / 10 # "Proportion of symptomatic-COVID at 6 weeks that are permanently injured in non-hospitalised survivors."
 
 # 4.5 "To estimate permanently injured after 6 weeks."
-ppi_oak_hosp = symp_oak_itu * ppi_itu + symp_oak_ward * ppi_ward # "Estimated proportion of all known cases permanently injured after hospitalisation.	"
-ppi_oak_nonhosp = symp_oak_nonhosp * ppi_nonhosp # "Estimated proportion of all known cases permanently injured in the non-hospitalised	"
+ppi_oak_hosp = symp_oak_itu * injuryRate_ITU + symp_oak_ward * injuryRate_Ward # D59 "Estimated proportion of all known cases permanently injured after hospitalisation.	"
+ppi_oak_nonhosp = symp_oak_nonhosp * injuryRate_NonHosp # D60 "Estimated proportion of all known cases permanently injured in the non-hospitalised	"
 
 # 6 "Adjust prevalence of permanent injury for all infections, known and unknown"
-perm_inj_prev_corrected = ppi_oak_hosp + ppi_oak_nonhosp  # "Adjusted prevalence of permanent injury for all infections, known and unknown"
-if modeltype == 'To date':
-    perm_inj_prev_corrected *= all_case_correction
+theFloor = ppi_oak_hosp + ppi_oak_nonhosp  # "Adjusted prevalence of permanent injury for all infections, known and unknown"
+if modeltype != 'To date':
+    theFloor *= all_case_correction
