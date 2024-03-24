@@ -1,0 +1,44 @@
+## Quantities Mentioned in the paper:
+
+1) Prevalence of symptoms (symptom_prevalence.py)
+    i) Those coefficients from the log-exponential regression.
+        a) Data from Covid Infection Survey (3 data points.)
+            alpha) themselves on the basis of a survey with 8,193 folks.
+
+2) Distribution of groups and group mortality outcomes (group_dist.py)
+    i) 10.8 percent of known cases admitted to hospital.
+        a) GOV.UK Coronavirus (COVID-19) in the UK. 2020
+    ii) 16.5% of hospitalized were admitted to critical care
+        a) https://doi.org/10.1136/bmj.m1985
+    iii) Mortalitry rate for critical care patients
+        a) ICNARC report on COVID-19 in critical care: England, Wales and Northern Ireland 24 December 2020
+    iv) ward mortality 23.2%
+        a) GOV.UK Coronavirus (COVID-19) in the UK. 2020
+        b) COVID-19 Daily Deaths. england.nhs.uk
+    v) therefore, .9% of the 9.0% admitted for ward-care survived.
+
+3) Prevalence of permanently injured
+    i) 12% of the 66.6 million UK population having been infected
+        a) ONS. Coronavirus (COVID-19) Infection Survey: antibody data for the UK, January 2021. 2021.
+    ii) 33% of SARS-Cov-2 infections resulted in a positive test (assuming no reinfections).
+        a) GOV.UK Coronavirus (COVID-19) in the UK. 2020
+    iii) Symptom prevalence at 6 weeks was set at 72% for ITU and 60% for ward patients
+        a) https://doi.org/10.1002/jmv.26368
+    iv) 16% for nonhosp
+        a) Office for National Statistics. The prevalence of long COVID symptoms and COVID-19 complications.  2020
+    v) About a third of previously employed patients with ARDS were still unemployed 5-years
+later [7].
+    vi) final 0.2% prevalence of the permanently injured amongst all COVID-19 cases (mostly assumptions)
+
+4) Utility
+    i) Average loss of utility for hospitalised COVID- 19 patients, split by general ward-care (-6.1%), and care on ITU treatment (-15.5%) was reported in the UK after a mean of 48 days [15].
+    ii) COVID-19 symptomatic utility change of -6.1%/60% = -10% for ward patients and -15.5%/72% = -22% for ITU patients symptomatic at 48 days post COVID-19
+    iii) UK [21]. At one-year post-discharge, mean utility was 0.58, both for those above and below the age of 65. Taking into account the reference population utility for the UK (0.856) [22], the ARDS specific utility at 1-year was calculated at 0.58/0.856 = 0.68.
+    iv) Aggregate COVID-specific utility for the symptomatic COVID cohort was calculated at
+-11%, using a weighted sum of the utilities for the three treatment groups (ward, ITU and
+population).
+
+5) Results
+    i) Within a 1-year time-horizon, the estimated undiscounted QALY loss in survi- vors was 299,730 (0.6% of the total expected QALYs for that year) with 271,037 QALYs (92%) lost to symptomatic COVID-19 in the acute, ongoing and post-COVID syndrome; and 28,692 (8%) lost to permanent injury from COVID-19.
+    ii) With a 10-year time- horizon, the estimated total undiscounted QALY loss in survivors was 557,764 with 271,310 (54%) QALYs lost to symptomatic COVID-19 in the acute, ongoing and post-COVID syn- drome, and 286,454 (46%) lost to permanent injury from COVID-19. 
+    iii) Discounted QALY loss was 536,877, representing a monetary value of £32.2 billion and an average loss of about 0.013 QALY per infection. Regardless of timeframe, an estimated 90,142 people would be left with permanent injury.
