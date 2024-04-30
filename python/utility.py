@@ -4,23 +4,21 @@
 
 ##4) Utility
 import numpy as np
-from python.lib import get_mean_post_prop
+from python.lib import get_mean_post_prop, nsamp
 from scipy.optimize import minimize_scalar
 from scipy.stats import norm, gamma
 from python.group_dist import inputs as gd_inputs
-
-nsamp = 100
 
 inputs = {}
 
 ##i) Proportion of people with Fatigue about 48 days after hospitalization.
 nward = 68
-xward = 41
-nicu_fatigue = 32
+xward_fatigue = 41
+nicu = 32
 xicu_fatigue = 23
 
-inputs['6w_pward_fatigue'] = get_mean_post_prop(xward_fatigue, nward)
-inputs['6w_picu_fatigue'] = get_mean_post_prop(xicu_fatigue, nicu)
+inputs['6w_pward_fatigue'] = get_mean_post_prop(xward_fatigue, nward, nsamp = nsamp)
+inputs['6w_picu_fatigue'] = get_mean_post_prop(xicu_fatigue, nicu, nsamp = nsamp)
 
 ##ii) Average loss of utility for hospitalised COVID- 19 patients, split by general ward-care (-6.1%), and care on ITU treatment (-15.5%) was reported in the UK after a mean of 48 days [15].
 # https://onlinelibrary.wiley.com/doi/epdf/10.1002/jmv.26368
@@ -44,7 +42,7 @@ pl05_icu = nl05_icu / nicu
 #a = mu*mu/sig2
 #s = sig2/mu
 #gamma.mean(a=a,scale=s)
-gamma.var(a=a,scale=s)
+#gamma.var(a=a,scale=s)
 
 def cost_ward(sig2):
     mu = -xbar_ward
@@ -102,13 +100,15 @@ N = 795
 
 reference_qual = 0.85
 
-inputs['util_permin'] = {}
-inputs['util_permin']['est'] = mean / reference_qual
-inputs['util_permin']['sample'] = norm.rvs(loc=mean,scale=sd/np.sqrt(N),size=nsamp) / reference_qual
+inputs['lostQALYs_Sympt'] = {} # ""QoL lost for the permanently injured (COVID injured)"
+inputs['lostQALYs_Sympt']['est'] = 1-mean / reference_qual
+inputs['lostQALYs_Sympt']['samp'] = np.minimum(1,np.maximum(0,1-norm.rvs(loc=mean,scale=sd/np.sqrt(N),size=nsamp) / reference_qual))
 
 ##v) Aggregate COVID-specific utility for the symptomatic COVID cohort was calculated at -11%, using a weighted sum of the utilities for the three treatment groups (ward, ITU and population).
 ## They report 11% in paper but I see 10% in the Excel sheet as well as from these calculations.
 
-inputs['agg_util'] = {}
-inputs['agg_util']['est'] = gd_inputs['prop_icu']['est'] * inputs['SUC_icu']['est'] + gd_inputs['prop_ward']['est'] * inputs['SUC_ward']['est'] + (1-gd_inputs['prop_hosp']['est']) * inputs['SUC_nonhosp']['est']
-inputs['agg_util']['samp'] = gd_inputs['prop_icu']['samp'] * inputs['SUC_icu']['samp'] + gd_inputs['prop_ward']['samp'] * inputs['SUC_ward']['samp'] + (1-gd_inputs['prop_hosp']['samp']) * inputs['SUC_nonhosp']['samp']
+inputs['lostQALYs_Injured'] = {}
+inputs['lostQALYs_Injured']['est'] = -(gd_inputs['prop_icu']['est'] * inputs['SUC_icu']['est'] + gd_inputs['prop_ward']['est'] * inputs['SUC_ward']['est'] + (1-gd_inputs['prop_hosp']['est']) * inputs['SUC_nonhosp']['est'])
+inputs['lostQALYs_Injured']['samp'] = -(gd_inputs['prop_icu']['samp'] * inputs['SUC_icu']['samp'] + gd_inputs['prop_ward']['samp'] * inputs['SUC_ward']['samp'] + (1-gd_inputs['prop_hosp']['samp']) * inputs['SUC_nonhosp']['samp'])
+
+

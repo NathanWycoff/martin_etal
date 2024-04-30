@@ -3,12 +3,12 @@
 
 import numpy as np
 
-from python.proportionLong import theFloor,population
-from python.Utility import Ugeneral,UInjury, ITU_injured, Ward_injured, NonHosp_injured
-from python.sim_settings import modeltype
-from python.UK_COVIDCases import NumCases
-from python.COVIDInfectionSurvey import Constant, PowerTerm
-from python.lifeExpectancy import lifeExpectancyAdjusted
+from python.repro.proportionLong import theFloor,population
+from python.repro.Utility import Ugeneral,UInjury, ITU_injured, Ward_injured, NonHosp_injured
+from python.repro.sim_settings import modeltype
+from python.repro.UK_COVIDCases import NumCases
+from python.repro.COVIDInfectionSurvey import Constant, PowerTerm
+from python.repro.lifeExpectancy import lifeExpectancyAdjusted
 
 daysperyear = 365.25
 

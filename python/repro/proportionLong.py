@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-from python.WardSurvival import ward_deathrate
-from python.sim_settings import modeltype
+from python.repro.WardSurvival import ward_deathrate
+from python.repro.sim_settings import modeltype
 
 #1 "To identify the proportion of patients hospitalised"
 # UK-wide covid data.

@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import pandas as pd
-from python.proportionLong import p48_ITU, p48_Ward, pITU_survAlln, pWard_SurvAlln, pNonHosp_SurvAlln, injuryRate_ITU, injuryRate_Ward, injuryRate_NonHosp
+from python.repro.proportionLong import p48_ITU, p48_Ward, pITU_survAlln, pWard_SurvAlln, pNonHosp_SurvAlln, injuryRate_ITU, injuryRate_Ward, injuryRate_NonHosp
 
 eq_df = pd.DataFrame({ ##D7-G11
             'itu_pre' : [1.6, 1.2, 1.3, 1.4, 1.4],

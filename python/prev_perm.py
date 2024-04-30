@@ -3,10 +3,8 @@
 #  prev_perm.py Author "Nathan Wycoff <nathanbrwycoff@gmail.com>" Date 03.24.2024
 
 import numpy as np
-from python.lib import get_mean_post_prop
+from python.lib import get_mean_post_prop, nsamp
 from python.group_dist import inputs as gd_inputs
-
-nsamp = 100
 
 inputs = {}
 

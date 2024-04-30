@@ -1,6 +1,10 @@
 
 import numpy as np
 
+# Settings
+nsamp = 10000
+regtype = 'beta'
+
 def get_mean_post_prop(success, total, nsamp = 100):
     prop_succ = success / total
     post_alpha = success + 0.5
